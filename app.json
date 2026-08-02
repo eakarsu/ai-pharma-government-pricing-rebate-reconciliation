@@ -1,0 +1,1301 @@
+{
+  "id": "ai-pharma-government-pricing-rebate-reconciliation",
+  "title": "Pharma Price Integrity Hub",
+  "tagline": "Government pricing calculations, rebate reconciliation, and defensible restatements",
+  "industry": "Life Sciences Market Access",
+  "port": 4514,
+  "accent": "#db2777",
+  "valueLabel": "Liability reconciled",
+  "value": "$31.4M",
+  "workflows": [
+    {
+      "id": "amp",
+      "title": "AMP Calculation Review",
+      "description": "Validate transaction classes, exclusions, lagged adjustments, and AMP calculations.",
+      "fields": [
+        {
+          "key": "product",
+          "label": "Product / NDC",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "quarter",
+          "label": "Reporting Quarter",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "grossSales",
+          "label": "Gross Sales",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "exclusionRationale",
+          "label": "Exclusion Rationale",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "product": "00069-1000-01",
+            "quarter": "Reporting Quarter STD-2026-104",
+            "grossSales": 285000,
+            "exclusionRationale": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "product": "00078-0526-15",
+            "quarter": "Reporting Quarter RISK-2026-227",
+            "grossSales": 875000,
+            "exclusionRationale": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "product": "50458-0580-30",
+            "quarter": "Reporting Quarter EXC-2026-319",
+            "grossSales": 142500,
+            "exclusionRationale": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "best-price",
+      "title": "Best Price Surveillance",
+      "description": "Detect candidate best-price events across discounts, rebates, and bundled arrangements.",
+      "fields": [
+        {
+          "key": "product",
+          "label": "Product / NDC",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "customerClass",
+          "label": "Customer Class",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "netPrice",
+          "label": "Net Price",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "arrangement",
+          "label": "Arrangement Details",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "product": "00069-1000-01",
+            "customerClass": "Customer Class STD-2026-104",
+            "netPrice": 285000,
+            "arrangement": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "product": "00078-0526-15",
+            "customerClass": "Customer Class RISK-2026-227",
+            "netPrice": 875000,
+            "arrangement": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "product": "50458-0580-30",
+            "customerClass": "Customer Class EXC-2026-319",
+            "netPrice": 142500,
+            "arrangement": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "medicaid-rebate",
+      "title": "Medicaid Rebate Reconciliation",
+      "description": "Reconcile state invoices, units, URAs, disputes, and payments.",
+      "fields": [
+        {
+          "key": "state",
+          "label": "State",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "invoiceQuarter",
+          "label": "Invoice Quarter",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "invoiceAmount",
+          "label": "Invoice Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "unitVariance",
+          "label": "Unit Variance",
+          "type": "number",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "state": "Pennsylvania",
+            "invoiceQuarter": "INV-2026-00841",
+            "invoiceAmount": 285000,
+            "unitVariance": 125
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "state": "California",
+            "invoiceQuarter": "INV-2026-01473",
+            "invoiceAmount": 875000,
+            "unitVariance": 975
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "state": "Texas",
+            "invoiceQuarter": "INV-2026-02219",
+            "invoiceAmount": 142500,
+            "unitVariance": 41
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "inflation-rebate",
+      "title": "Medicare Inflation Rebate Review",
+      "description": "Review Part B and Part D inflation rebate inputs, exclusions, and liability.",
+      "fields": [
+        {
+          "key": "program",
+          "label": "Program",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Part B",
+            "Part D"
+          ]
+        },
+        {
+          "key": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "applicablePeriod",
+          "label": "Applicable Period",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "estimatedLiability",
+          "label": "Estimated Liability",
+          "type": "currency",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "program": "Part B",
+            "product": "Product STD-2026-104",
+            "applicablePeriod": "Applicable Period STD-2026-104",
+            "estimatedLiability": 285000
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "program": "Part B",
+            "product": "Product RISK-2026-227",
+            "applicablePeriod": "Applicable Period RISK-2026-227",
+            "estimatedLiability": 875000
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "program": "Part B",
+            "product": "Product EXC-2026-319",
+            "applicablePeriod": "Applicable Period EXC-2026-319",
+            "estimatedLiability": 142500
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "discount-program",
+      "title": "Manufacturer Discount Reconciliation",
+      "description": "Reconcile Part D manufacturer discount invoices, LIS flags, disputes, and payment.",
+      "fields": [
+        {
+          "key": "invoiceId",
+          "label": "Invoice ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "contract",
+          "label": "PDP / MA-PD Contract",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "discountAmount",
+          "label": "Discount Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "varianceReason",
+          "label": "Variance Reason",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "invoiceId": "INV-2026-00841",
+            "contract": "H1234",
+            "discountAmount": 285000,
+            "varianceReason": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "invoiceId": "INV-2026-01473",
+            "contract": "H5678",
+            "discountAmount": 875000,
+            "varianceReason": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "invoiceId": "INV-2026-02219",
+            "contract": "H9012",
+            "discountAmount": 142500,
+            "varianceReason": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "restatement",
+      "title": "Price Restatement Governance",
+      "description": "Assess materiality, approvals, downstream impacts, and submission evidence.",
+      "fields": [
+        {
+          "key": "metric",
+          "label": "Metric",
+          "type": "select",
+          "required": true,
+          "options": [
+            "AMP",
+            "Best Price",
+            "ASP",
+            "Non-FAMP"
+          ]
+        },
+        {
+          "key": "period",
+          "label": "Affected Period",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "financialImpact",
+          "label": "Financial Impact",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "restatementReason",
+          "label": "Restatement Reason",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "metric": "AMP",
+            "period": "Affected Period STD-2026-104",
+            "financialImpact": 285000,
+            "restatementReason": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "metric": "AMP",
+            "period": "Affected Period RISK-2026-227",
+            "financialImpact": 875000,
+            "restatementReason": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "metric": "AMP",
+            "period": "Affected Period EXC-2026-319",
+            "financialImpact": 142500,
+            "restatementReason": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "class-of-trade",
+      "title": "Class-of-Trade Classification",
+      "description": "Classify customers and transactions consistently for government pricing treatment.",
+      "fields": [
+        {
+          "key": "customer",
+          "label": "Customer",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "channel",
+          "label": "Channel",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "proposedClass",
+          "label": "Proposed Class of Trade",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "classificationEvidence",
+          "label": "Classification Evidence",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "customer": "Customer STD-2026-104",
+            "channel": "Channel STD-2026-104",
+            "proposedClass": "Proposed Class of Trade STD-2026-104",
+            "classificationEvidence": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "customer": "Customer RISK-2026-227",
+            "channel": "Channel RISK-2026-227",
+            "proposedClass": "Proposed Class of Trade RISK-2026-227",
+            "classificationEvidence": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "customer": "Customer EXC-2026-319",
+            "channel": "Channel EXC-2026-319",
+            "proposedClass": "Proposed Class of Trade EXC-2026-319",
+            "classificationEvidence": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "audit-package",
+      "title": "Government Pricing Audit Package",
+      "description": "Assemble calculations, source lineage, approvals, and exception resolution evidence.",
+      "fields": [
+        {
+          "key": "auditPeriod",
+          "label": "Audit Period",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "productScope",
+          "label": "Product Scope",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "openExceptions",
+          "label": "Open Exceptions",
+          "type": "number",
+          "required": true
+        },
+        {
+          "key": "packageNotes",
+          "label": "Package Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "auditPeriod": "Audit Period STD-2026-104",
+            "productScope": "Product Scope STD-2026-104",
+            "openExceptions": 125,
+            "packageNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "auditPeriod": "Audit Period RISK-2026-227",
+            "productScope": "Product Scope RISK-2026-227",
+            "openExceptions": 975,
+            "packageNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "auditPeriod": "Audit Period EXC-2026-319",
+            "productScope": "Product Scope EXC-2026-319",
+            "openExceptions": 41,
+            "packageNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "amp",
+      "title": "AMP Calculation Review Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for amp calculation review.",
+      "table": "op_amp",
+      "columns": [
+        {
+          "key": "product",
+          "label": "Product / NDC",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "quarter",
+          "label": "Reporting Quarter",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_quarter"
+        },
+        {
+          "key": "grossSales",
+          "label": "Gross Sales",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_grossSales"
+        },
+        {
+          "key": "exclusionRationale",
+          "label": "Exclusion Rationale",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_exclusionRationale"
+        }
+      ]
+    },
+    {
+      "id": "best-price",
+      "title": "Best Price Surveillance Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for best price surveillance.",
+      "table": "op_best_price",
+      "columns": [
+        {
+          "key": "product",
+          "label": "Product / NDC",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "customerClass",
+          "label": "Customer Class",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_customerClass"
+        },
+        {
+          "key": "netPrice",
+          "label": "Net Price",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_netPrice"
+        },
+        {
+          "key": "arrangement",
+          "label": "Arrangement Details",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_arrangement"
+        }
+      ]
+    },
+    {
+      "id": "medicaid-rebate",
+      "title": "Medicaid Rebate Reconciliation Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for medicaid rebate reconciliation.",
+      "table": "op_medicaid_rebate",
+      "columns": [
+        {
+          "key": "state",
+          "label": "State",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_state"
+        },
+        {
+          "key": "invoiceQuarter",
+          "label": "Invoice Quarter",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_invoiceQuarter"
+        },
+        {
+          "key": "invoiceAmount",
+          "label": "Invoice Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_invoiceAmount"
+        },
+        {
+          "key": "unitVariance",
+          "label": "Unit Variance",
+          "type": "number",
+          "required": false,
+          "dbKey": "data_unitVariance"
+        }
+      ]
+    },
+    {
+      "id": "inflation-rebate",
+      "title": "Medicare Inflation Rebate Review Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for medicare inflation rebate review.",
+      "table": "op_inflation_rebate",
+      "columns": [
+        {
+          "key": "program",
+          "label": "Program",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Part B",
+            "Part D"
+          ],
+          "dbKey": "data_program"
+        },
+        {
+          "key": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "applicablePeriod",
+          "label": "Applicable Period",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_applicablePeriod"
+        },
+        {
+          "key": "estimatedLiability",
+          "label": "Estimated Liability",
+          "type": "currency",
+          "required": false,
+          "dbKey": "data_estimatedLiability"
+        }
+      ]
+    },
+    {
+      "id": "discount-program",
+      "title": "Manufacturer Discount Reconciliation Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for manufacturer discount reconciliation.",
+      "table": "op_discount_program",
+      "columns": [
+        {
+          "key": "invoiceId",
+          "label": "Invoice ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_invoiceId"
+        },
+        {
+          "key": "contract",
+          "label": "PDP / MA-PD Contract",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_contract"
+        },
+        {
+          "key": "discountAmount",
+          "label": "Discount Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_discountAmount"
+        },
+        {
+          "key": "varianceReason",
+          "label": "Variance Reason",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_varianceReason"
+        }
+      ]
+    },
+    {
+      "id": "restatement",
+      "title": "Price Restatement Governance Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for price restatement governance.",
+      "table": "op_restatement",
+      "columns": [
+        {
+          "key": "metric",
+          "label": "Metric",
+          "type": "select",
+          "required": true,
+          "options": [
+            "AMP",
+            "Best Price",
+            "ASP",
+            "Non-FAMP"
+          ],
+          "dbKey": "data_metric"
+        },
+        {
+          "key": "period",
+          "label": "Affected Period",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_period"
+        },
+        {
+          "key": "financialImpact",
+          "label": "Financial Impact",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_financialImpact"
+        },
+        {
+          "key": "restatementReason",
+          "label": "Restatement Reason",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_restatementReason"
+        }
+      ]
+    },
+    {
+      "id": "class-of-trade",
+      "title": "Class-of-Trade Classification Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for class-of-trade classification.",
+      "table": "op_class_of_trade",
+      "columns": [
+        {
+          "key": "customer",
+          "label": "Customer",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_customer"
+        },
+        {
+          "key": "channel",
+          "label": "Channel",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_channel"
+        },
+        {
+          "key": "proposedClass",
+          "label": "Proposed Class of Trade",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_proposedClass"
+        },
+        {
+          "key": "classificationEvidence",
+          "label": "Classification Evidence",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_classificationEvidence"
+        }
+      ]
+    },
+    {
+      "id": "audit-package",
+      "title": "Government Pricing Audit Package Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for government pricing audit package.",
+      "table": "op_audit_package",
+      "columns": [
+        {
+          "key": "auditPeriod",
+          "label": "Audit Period",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_auditPeriod"
+        },
+        {
+          "key": "productScope",
+          "label": "Product Scope",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_productScope"
+        },
+        {
+          "key": "openExceptions",
+          "label": "Open Exceptions",
+          "type": "number",
+          "required": true,
+          "dbKey": "data_openExceptions"
+        },
+        {
+          "key": "packageNotes",
+          "label": "Package Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_packageNotes"
+        }
+      ]
+    },
+    {
+      "id": "product-master",
+      "title": "Product and NDC Master",
+      "description": "Products, package sizes, launch dates, status, and reporting identifiers.",
+      "table": "op_product_master",
+      "columns": [
+        {
+          "key": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "ndc",
+          "label": "NDC-11",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_ndc"
+        },
+        {
+          "key": "packageSize",
+          "label": "Package Size",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_packageSize"
+        },
+        {
+          "key": "launchDate",
+          "label": "Launch Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_launchDate"
+        }
+      ]
+    },
+    {
+      "id": "class-of-trade-master",
+      "title": "Customer Class-of-Trade Master",
+      "description": "Customer identifiers, channels, classes, exclusions, and effective periods.",
+      "table": "op_class_of_trade_master",
+      "columns": [
+        {
+          "key": "customer",
+          "label": "Customer",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_customer"
+        },
+        {
+          "key": "customerId",
+          "label": "Customer ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_customerId"
+        },
+        {
+          "key": "channel",
+          "label": "Channel",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_channel"
+        },
+        {
+          "key": "classOfTrade",
+          "label": "Class of Trade",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_classOfTrade"
+        }
+      ]
+    },
+    {
+      "id": "state-invoice-ledger",
+      "title": "State Rebate Invoice Ledger",
+      "description": "Invoices, quarters, units, URAs, disputes, and payment status.",
+      "table": "op_state_invoice_ledger",
+      "columns": [
+        {
+          "key": "state",
+          "label": "State",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_state"
+        },
+        {
+          "key": "quarter",
+          "label": "Quarter",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_quarter"
+        },
+        {
+          "key": "units",
+          "label": "Units",
+          "type": "number",
+          "required": true,
+          "dbKey": "data_units"
+        },
+        {
+          "key": "invoiceAmount",
+          "label": "Invoice Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_invoiceAmount"
+        }
+      ]
+    },
+    {
+      "id": "rebate-programs",
+      "title": "Rebate Program Registry",
+      "description": "Programs, contracts, calculation rules, submission cadence, and ownership.",
+      "table": "op_rebate_programs",
+      "columns": [
+        {
+          "key": "program",
+          "label": "Program",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_program"
+        },
+        {
+          "key": "programType",
+          "label": "Program Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_programType"
+        },
+        {
+          "key": "calculationBasis",
+          "label": "Calculation Basis",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_calculationBasis"
+        },
+        {
+          "key": "effectiveDate",
+          "label": "Effective Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_effectiveDate"
+        }
+      ]
+    }
+  ],
+  "domainProduct": {
+    "home": "Government Pricing Operations",
+    "context": "AMP, best price, Medicaid rebates, Medicare inflation rebates, and controlled restatements.",
+    "features": [
+      {
+        "id": "amp-calculation",
+        "title": "AMP Transaction Classification",
+        "description": "Classify sales, returns, chargebacks, rebates, lagged adjustments, and statutory exclusions by NDC and quarter.",
+        "view": "reconciliation",
+        "modules": [
+          "amp",
+          "class-of-trade-master"
+        ],
+        "actions": [
+          {
+            "id": "accept-amp",
+            "label": "Approve AMP Classification",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved AMP transaction classification and exclusion rationale."
+          },
+          {
+            "id": "open-amp-exception",
+            "label": "Open AMP Exception",
+            "nextStatus": "Investigating",
+            "auditDetail": "Opened an AMP exception for class-of-trade or lagged-adjustment review."
+          }
+        ]
+      },
+      {
+        "id": "best-price",
+        "title": "Best Price Surveillance",
+        "description": "Evaluate candidate prices across discounts, rebates, bundled arrangements, nominal pricing, and excluded channels.",
+        "view": "control",
+        "modules": [
+          "best-price",
+          "product-master"
+        ],
+        "actions": [
+          {
+            "id": "confirm-candidate",
+            "label": "Confirm Best-Price Candidate",
+            "nextStatus": "Review",
+            "auditDetail": "Confirmed a candidate best-price event for legal and finance review."
+          },
+          {
+            "id": "document-exclusion",
+            "label": "Document Statutory Exclusion",
+            "nextStatus": "Approved",
+            "auditDetail": "Documented and approved a statutory best-price exclusion."
+          }
+        ]
+      },
+      {
+        "id": "medicaid-rebates",
+        "title": "Medicaid Rebate Reconciliation",
+        "description": "Reconcile state invoice units, utilization, URA, scripts, disputes, payments, and interest by NDC and quarter.",
+        "view": "reconciliation",
+        "modules": [
+          "medicaid-rebate",
+          "state-invoice-ledger"
+        ],
+        "actions": [
+          {
+            "id": "approve-payment",
+            "label": "Approve Rebate Payment",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved validated Medicaid rebate units and payment amount."
+          },
+          {
+            "id": "open-state-dispute",
+            "label": "Open State Dispute",
+            "nextStatus": "Investigating",
+            "auditDetail": "Opened a state invoice dispute for unit or URA variance."
+          }
+        ]
+      },
+      {
+        "id": "inflation-rebates",
+        "title": "Medicare Inflation Rebate Control",
+        "description": "Review Part B and Part D units, benchmark prices, excluded units, inflation factors, and liability periods.",
+        "view": "control",
+        "modules": [
+          "inflation-rebate",
+          "rebate-programs"
+        ],
+        "actions": [
+          {
+            "id": "approve-liability",
+            "label": "Approve Inflation Liability",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved controlled inflation-rebate inputs and liability."
+          },
+          {
+            "id": "hold-liability",
+            "label": "Hold for Data Correction",
+            "nextStatus": "Investigating",
+            "auditDetail": "Held liability calculation pending source-data correction."
+          }
+        ]
+      },
+      {
+        "id": "restatement",
+        "title": "Restatement Governance",
+        "description": "Assess materiality, affected products and quarters, root cause, approval, resubmission, and downstream rebate impact.",
+        "view": "board",
+        "modules": [
+          "restatement",
+          "product-master"
+        ],
+        "actions": [
+          {
+            "id": "approve-restatement",
+            "label": "Approve Restatement",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved government-pricing restatement and downstream impact plan."
+          },
+          {
+            "id": "require-investigation",
+            "label": "Require Root-Cause Investigation",
+            "nextStatus": "Investigating",
+            "auditDetail": "Required additional root-cause and materiality analysis."
+          }
+        ]
+      }
+    ]
+  },
+  "integrations": [
+    {
+      "id": "integration-1",
+      "name": "Gross-to-net ledger",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-2",
+      "name": "State rebate invoices",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-3",
+      "name": "CMS manufacturer files",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-4",
+      "name": "Customer master",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-5",
+      "name": "Contract lifecycle platform",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    }
+  ],
+  "featureCount": 40,
+  "seededRecords": 300,
+  "demoUsers": 3,
+  "apiPort": 5514,
+  "dbName": "profit_ai_pharma_government_pricing_rebate_reconciliation"
+}
